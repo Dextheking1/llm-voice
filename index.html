@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Voice: spot the model in the text</title>
+<meta name="description" content="Paste a text and see its LLM voice: the hedging, stock words and formula phrasing language models write with. Highlighted markers, a 0 to 100 score, a human rewrite, and a reverse mode that turns plain text into full LLM voice.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-head">
+  <h1>LLM Voice</h1>
+  <p class="tagline">Spot the model in the text. Paste anything and get its LLM voice scored, its tells highlighted, and a plain human rewrite next to it.</p>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="key-heading">
+    <h2 id="key-heading">Your Pollinations key</h2>
+    <p>
+      This app runs on your own Pollen (BYOP). Paste a Pollinations API key and every
+      call goes from your browser straight to gen.pollinations.ai, billed to your key.
+      The key is stored only in this browser, in localStorage, and is never sent
+      anywhere else. No key yet? Get one free at enter.pollinations.ai.
+    </p>
+    <div class="key-row">
+      <label class="visually-hidden" for="keyInput">Pollinations API key</label>
+      <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="sk_... or pk_...">
+      <button id="saveKeyBtn" type="button">Save key</button>
+      <button id="validateKeyBtn" type="button">Validate key</button>
+      <button id="clearKeyBtn" type="button">Clear</button>
+    </div>
+    <p id="keyStatus" class="status" role="status"></p>
+    <div class="model-row">
+      <label for="modelSelect">Model</label>
+      <select id="modelSelect"></select>
+    </div>
+    <p id="demoBanner" class="demo-banner" hidden>
+      Demo mode: no key saved, so analysis runs on a local sample scan of a short
+      stock phrase list and rewrites use local sample rules. Nothing is sent to a
+      model and the results are sample quality. Save a key for the full model
+      analysis, humanise pass and reverse mode.
+    </p>
+  </section>
+
+  <section class="panel" aria-labelledby="input-heading">
+    <h2 id="input-heading">Text</h2>
+    <label class="visually-hidden" for="textInput">Text to analyse</label>
+    <textarea id="textInput" rows="9" placeholder="Paste the text you want checked here. A paragraph or two works best."></textarea>
+    <div class="input-row">
+      <span id="charCount" class="muted">0 characters</span>
+      <button id="loadSampleBtn" type="button">Load LLM voice sample</button>
+      <button id="loadHumanBtn" type="button">Load plain human sample</button>
+      <button id="clearTextBtn" type="button">Clear text</button>
+    </div>
+    <div class="action-row">
+      <button id="analyseBtn" type="button" class="primary">Analyse the voice</button>
+      <button id="humaniseBtn" type="button">Humanise it</button>
+      <button id="llmifyBtn" type="button">Reverse: full LLM voice</button>
+    </div>
+    <p id="runStatus" class="status" role="status"></p>
+  </section>
+
+  <section id="results" class="panel" hidden aria-labelledby="results-heading">
+    <h2 id="results-heading">Result</h2>
+    <div class="score-row">
+      <div class="score-box">
+        <span id="scoreValue" class="score-value">-</span>
+        <span class="score-scale">/ 100 LLM voice</span>
+        <span id="scoreBand" class="score-band"></span>
+      </div>
+      <p id="scoreSummary" class="score-summary"></p>
+    </div>
+
+    <div class="compare-grid">
+      <div>
+        <h3>Original, markers highlighted</h3>
+        <div id="highlightedText" class="highlighted"></div>
+      </div>
+      <div>
+        <h3 id="rewriteHeading">Rewrite</h3>
+        <div id="rewriteText" class="rewrite">
+          <p class="muted">Run Humanise or the reverse mode and the rewrite lands here, side by side with the original.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Markers found</h3>
+    <ol id="markerList" class="marker-list"></ol>
+    <p id="noMarkers" class="muted" hidden>No markers were found in this text.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="about-heading">
+    <h2 id="about-heading">What counts as the LLM voice</h2>
+    <p>
+      Language models write with a recognisable style: hedging (it is important to
+      note, ultimately), stock words (delve, tapestry, robust, leverage, utilize),
+      connector stacking (furthermore, moreover, additionally), formula openers and
+      endings (in today's fast-paced world, in conclusion), vague quantity (a wide
+      range of), balanced pairs (not only, but also), and a flat, even tone that
+      bullets everything and commits to nothing specific. None of these prove a
+      model wrote a text. They show how much of that style is in it.
+    </p>
+    <p class="muted">
+      Privacy: your text goes only to gen.pollinations.ai, only when you press a
+      button, and only under your own key. This page has no server, no accounts
+      and no tracking.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>LLM Voice. A Pollinations BYOP app. Quest #19180. <a href="https://pollinations.ai">Made with pollinations.ai</a></p>
+</footer>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
