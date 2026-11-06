@@ -1,0 +1,1 @@
+{"description":"Spot the LLM voice in a text: score, highlighted markers, human rewrite, and a reverse full LLM voice mode. Pollinations BYOP.","name":"llm-voice","private":true,"scripts":{"test":"node --test tests/core.test.js"},"version":"1.0.0"}
